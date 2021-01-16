@@ -1,0 +1,16 @@
+# Создать текстовый файл (не программно), сохранить в нем несколько строк, выполнить подсчет количества строк,
+# количества слов в каждой строке
+
+with open('2.txt', 'r') as file:
+    text = file.readlines()
+    num_lines = len(text)                            # count lines
+    print(f'Количество строк - {num_lines}.')
+    help_list = []                                   # make a list for count words
+    for lines in text:
+        line = lines.split()
+        help_list.append(line)                       # now we have a list with lines as elements
+    help_counter = 0                                 # make a counter for beautiful input
+    for words in help_list:
+        num_words = len(words)
+        help_counter += 1
+        print(f'Количество с слов в {help_counter} строке - {num_words}.')
