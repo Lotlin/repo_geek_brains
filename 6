@@ -1,0 +1,58 @@
+# Необходимо создать (не программно) текстовый файл, где каждая строка описывает учебный предмет
+# и наличие лекционных, практических и лабораторных занятий по этому предмету и их количество.
+# Важно, чтобы для каждого предмета не обязательно были все типы занятий.
+# Сформировать словарь, содержащий название предмета и общее количество занятий по нему. Вывести словарь на экран.
+# Примеры строк файла:
+# Информатика: 100(л) 50(пр) 20(лаб).
+# Физика: 30(л) — 10(лаб)
+# Физкультура: — 30(пр) —
+# Пример словаря:
+# {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
+
+
+with open('6.txt', 'r', encoding='utf8') as file:
+
+    result_dict = {}                                                        # make a result dict
+    num_hour = 0                                                            # for sum up hours
+
+    for line in file:
+
+        lectures = ''.join([s for s in line.split()[1] if s.isdigit()])     # count amount hours of lectures
+        try:
+            lectures = float(lectures)
+        except ValueError:
+            lectures = 0
+
+        practice = ''.join([s for s in line.split()[2] if s.isdigit()])      # count amount hours of practice
+        try:
+            practice = float(practice)
+        except ValueError:
+            practice = 0
+
+        laboratory = ''.join([s for s in line.split()[3] if s.isdigit()])    # count amount hours of laboratory
+        try:
+            laboratory = float(laboratory)
+        except ValueError:
+            laboratory = 0
+
+        num_hour = lectures + practice + laboratory                          # count result of hours
+        result_dict[line.split()[0]] = num_hour                              # make a dictionary
+
+    print(result_dict)
+
+'''
+Евгений, не смогла сделать перевод во float функцией. 
+print(type(lectures)) сообщает, что всё осталось строкой
+Подскажите, пожалуйста, что я сделала не так?
+
+код функции:
+def float_func(a):
+    try:
+        return float(a)
+    except ValueError:
+        return 0
+
+применяю функцию к переменной: 
+float_func(lectures)
+
+'''
