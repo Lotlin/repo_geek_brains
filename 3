@@ -1,0 +1,44 @@
+# Реализовать базовый класс Worker (работник), в котором определить атрибуты:
+# name, surname, position (должность), income (доход).
+# Последний атрибут должен быть защищенным и ссылаться на словарь, содержащий элементы: оклад и премия,
+# например, {"wage": wage, "bonus": bonus}.
+# Создать класс Position (должность) на базе класса Worker.
+# В классе Position реализовать методы получения полного имени сотрудника (get_full_name)
+# и дохода с учетом премии (get_total_income).
+# Проверить работу примера на реальных данных (создать экземпляры класса Position, передать данные,
+# проверить значения атрибутов, вызвать методы экземпляров).
+
+
+class Worker:
+
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income = {"wage": wage, "bonus": bonus}
+
+
+class Position(Worker):
+
+    def get_full_name(self):
+        return f'Фамилия работника: {self.surname}, имя: {self.name}'
+
+    def get_total_income(self):
+        self._income = self._income.get('wage') + self._income.get('bonus')
+        return f'Доход работника, включая премию: {self._income}'
+
+
+lawyer = Position('Roman', 'Bevzenko', 'lawyer', 200, 100)
+programmer = Position('Mike', 'Smith', 'programmer', 250, 100)
+print(lawyer.get_full_name())
+print(lawyer.get_total_income())
+print(lawyer.name)
+print(lawyer.surname)
+print(lawyer.position)
+print(lawyer._income)
+print(programmer.get_full_name())
+print(programmer.get_total_income())
+print(programmer.name)
+print(programmer.surname)
+print(programmer.position)
+print(programmer._income)
